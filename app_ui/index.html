@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task App</title>
+</head>
+<body>
+  <h1>Task Manager</h1>
+  <button onclick="getTasks()">Load Tasks</button>
+
+  <script>
+    async function getTasks() {
+      const res = await fetch("http://127.0.0.1:8000/tasks");
+      const data = await res.json();
+      console.log(data);
+      alert(JSON.stringify(data));
+    }
+  </script>
+</body>
+</html>
