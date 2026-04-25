@@ -1,0 +1,25 @@
+<script>
+const API_BASE = window.location.origin;
+
+async function getTasks() {
+  try {
+    console.log("Fetching tasks...");
+
+    const res = await fetch(`${API_BASE}/tasks`);
+
+    if (!res.ok) {
+      console.error("API error:", res.status, res.statusText);
+      return;
+    }
+
+    const data = await res.json();
+
+    console.log("Tasks received:", data);
+
+    alert(JSON.stringify(data));
+
+  } catch (error) {
+    console.error("Network or JS error:", error);
+  }
+}
+</script>
