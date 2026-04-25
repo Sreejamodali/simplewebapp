@@ -1,25 +1,40 @@
-<script>
-const API_BASE = window.location.origin;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Web App</title>
+</head>
 
-async function getTasks() {
-  try {
-    console.log("Fetching tasks...");
+<body>
 
-    const res = await fetch(`${API_BASE}/tasks`);
+  <h1>Tasks App</h1>
 
-    if (!res.ok) {
-      console.error("API error:", res.status, res.statusText);
-      return;
+  <button onclick="getTasks()">Get Tasks</button>
+
+  <script>
+    const API_BASE = window.location.origin;
+
+    async function getTasks() {
+      try {
+        console.log("Fetching tasks...");
+
+        const res = await fetch(`${API_BASE}/tasks`);
+
+        if (!res.ok) {
+          console.error("API error:", res.status);
+          return;
+        }
+
+        const data = await res.json();
+
+        console.log("Tasks received:", data);
+
+        alert(JSON.stringify(data));
+
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
+  </script>
 
-    const data = await res.json();
-
-    console.log("Tasks received:", data);
-
-    alert(JSON.stringify(data));
-
-  } catch (error) {
-    console.error("Network or JS error:", error);
-  }
-}
-</script>
+</body>
+</html>
