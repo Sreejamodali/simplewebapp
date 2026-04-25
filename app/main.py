@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import logging
 import time
+from fastapi.responses import RedirectResponse
 
 # ----------------------------
 # LOGGING SETUP
@@ -72,6 +73,13 @@ app.mount("/ui", StaticFiles(directory="ui", html=True), name="ui")
 def health():
     logger.info("Health check endpoint called")
     return {"status": "ok"}
+
+
+
+
+@app.get("/")
+def root():
+    return RedirectResponse(url="/ui")
 
 # ----------------------------
 # TASK API
